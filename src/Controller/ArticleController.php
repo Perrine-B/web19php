@@ -3,8 +3,12 @@ namespace src\Controller;
 
 use src\Model\Article;
 use src\Model\BDD;
+use src\Model\Categorie;
 
 class ArticleController extends AbstractController {
+
+
+
 
     public function Add(){
         if($_POST){
@@ -27,6 +31,15 @@ class ArticleController extends AbstractController {
     public function All(){
         $articles = new Article();
         $datas = $articles->SqlGetAll(BDD::getInstance());
+
+/********************** Partie 4 non terminée
+        // Replace numbers by name -- 4 inachevé
+
+        // Charger les données venant de catégorie
+        $categories = new Categorie();
+        $categoriesList = $categories->SqlGetAll(BDD::getInstance());
+
+*******/
 
         return $this->twig->render("Article/all.html.twig", [
             "articleList"=>$datas

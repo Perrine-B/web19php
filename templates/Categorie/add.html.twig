@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Ajout de la catégorie :</h1>
+    <form method="post">
+        <label for="Libelle"> Libelle de la catégorie </label>
+        <input type="text" name="Libelle">
+        <label for="Libelle"> Icone FontAwesome </label>
+        <textarea name="Icone">
+        </textarea>
+        <input type="submit" value="Enregistrer les modifications">
+    </form>
+
+{% endblock %}
