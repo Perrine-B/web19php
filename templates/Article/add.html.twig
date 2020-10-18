@@ -14,9 +14,9 @@
             <option>Léo</option>
             <option >Aegir</option>
         </select>
-        <select name="Auteur">
-            {% for categorie in categories  %}
-            <option > {{ categorie}}</option>
+        <select name="CategorieId">
+            {% for key, categorie in categories %}
+            <option value={{key}} > {{categorie}}</option>
             {% endfor %}
         </select>
         <input type="submit" value="Enregistrer les modifications">

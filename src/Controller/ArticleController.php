@@ -11,6 +11,7 @@ class ArticleController extends AbstractController {
     // CRUD 
     public function Add(){
         if($_POST){
+            var_dump($_POST);
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
             $objArticle->setDescription($_POST["Description"]);
@@ -20,17 +21,15 @@ class ArticleController extends AbstractController {
             //Exécuter l'insertion
             $id = $objArticle->SqlAdd(BDD::getInstance());
             // Redirection
-            header("Location:/cesiblog/web19php/public/article/show/$id");
+            //header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
             $allCategories = new Categorie(); 
             $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
 
             $categories = [];
             foreach ($queryCategories as $categorie){
-                array_push($categories, $categorie->getLibelle());
+                $categories[$categorie->getId()] = $categorie->getLibelle();
             }
-
-
             return $this->twig->render("Article/add.html.twig", [
                 'categories' => $categories
             ]);
