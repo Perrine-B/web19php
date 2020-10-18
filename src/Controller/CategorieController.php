@@ -6,7 +6,6 @@ use src\Model\BDD;
 
 class CategorieController extends AbstractController {
 
-
     // CRUD
 
     // 1. READ
@@ -44,7 +43,7 @@ class CategorieController extends AbstractController {
             //Exécuter l'insertion
             $id = $objCategorie->SqlAdd(BDD::getInstance());
             // Redirection - arefaire
-            header("Location:/Categorie/show/$id");
+            header("Location:/cesiblog/web19php/public/Categorie/show/$id");
         }else{
             return $this->twig->render("Categorie/add.html.twig");
         }
@@ -82,7 +81,7 @@ public function Update($id){
         $categories = new Categorie();
         $datas = $categories->SqlDeleteById(BDD::getInstance(),$id);
 
-        header("Location:/Categorie/All");
+        header("Location:/cesiblog/web19php/public/Categorie/All");
     }
 
 }

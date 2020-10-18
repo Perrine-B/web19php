@@ -10,59 +10,44 @@ class Categorie {
 // Getters and setters
 
     /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->Id;
-    }
-
-    /**
-     * @param mixed $Id
-     * @return Article
-     */
-    public function setId($Id)
-    {
-        $this->Id = $Id;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
+     * Get the value of Libelle
+     */ 
     public function getLibelle()
     {
         return $this->Libelle;
     }
 
     /**
-     * @param mixed $Titre
-     * @return Article
-     */
+     * Set the value of Libelle
+     *
+     * @return  self
+     */ 
     public function setLibelle($Libelle)
     {
         $this->Libelle = $Libelle;
+
         return $this;
     }
 
     /**
-     * @return mixed
-     */
+     * Get the value of Icone
+     */ 
     public function getIcone()
     {
         return $this->Icone;
     }
 
     /**
-     * @param mixed $Description
-     * @return Article
-     */
+     * Set the value of Icone
+     *
+     * @return  self
+     */ 
     public function setIcone($Icone)
     {
         $this->Icone = $Icone;
+
         return $this;
     }
-
 
 // Requests
 
@@ -130,6 +115,28 @@ class Categorie {
             ]);
             return true;
         }
+
+
+
+    /**
+     * Get the value of Id
+     */ 
+    public function getId()
+    {
+        return $this->Id;
+    }
+
+    /**
+     * Set the value of Id
+     *
+     * @return  self
+     */ 
+    public function setId($Id)
+    {
+        $this->Id = $Id;
+
+        return $this;
+    }
 
 
 }

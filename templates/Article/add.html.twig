@@ -16,7 +16,7 @@
         </select>
         <select name="Auteur">
             {% for categorie in categories  %}
-            <option >{categorie.libelle}</option>
+            <option > {{ categorie}}</option>
             {% endfor %}
         </select>
         <input type="submit" value="Enregistrer les modifications">

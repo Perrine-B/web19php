@@ -7,6 +7,8 @@ use src\Model\Categorie;
 
 class ArticleController extends AbstractController {
 
+
+    // CRUD 
     public function Add(){
         if($_POST){
             $objArticle = new Article();
@@ -14,17 +16,30 @@ class ArticleController extends AbstractController {
             $objArticle->setDescription($_POST["Description"]);
             $objArticle->setDateAjout($_POST["DateAjout"]);
             $objArticle->setAuteur($_POST["Auteur"]);
+            $objArticle->setCategorieId($_POST["CategorieId"]);
             //Exécuter l'insertion
             $id = $objArticle->SqlAdd(BDD::getInstance());
             // Redirection
-            header("Location:/article/show/$id");
+            header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
-            return $this->twig->render("Article/add.html.twig");
+            $allCategories = new Categorie(); 
+            $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
+
+            $categories = [];
+            foreach ($queryCategories as $categorie){
+                array_push($categories, $categorie->getLibelle());
+            }
+
+
+            return $this->twig->render("Article/add.html.twig", [
+                'categories' => $categories
+            ]);
         }
 
 
     }
 
+    // READ
     public function All(){
         $articles = new Article();
         $datas = $articles->SqlGetAll(BDD::getInstance());
@@ -43,6 +58,8 @@ class ArticleController extends AbstractController {
         ]);
     }
 
+    // UPDATE
+
     public function Show($id){
         $articles = new Article();
         $datas = $articles->SqlGetById(BDD::getInstance(),$id);
@@ -52,11 +69,12 @@ class ArticleController extends AbstractController {
         ]);
     }
 
+    // DELETE
     public function Delete($id){
         $articles = new Article();
         $datas = $articles->SqlDeleteById(BDD::getInstance(),$id);
 
-        header("Location:/Article/All");
+        header("Location:/cesiblog/web19php/public/Article/All");
     }
 
     public function Update($id){
@@ -73,7 +91,7 @@ class ArticleController extends AbstractController {
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
             // Redirection
-            header("Location:/article/show/$id");
+            header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
             return $this->twig->render("Article/update.html.twig", [
                 "article"=>$datas
@@ -108,5 +126,9 @@ class ArticleController extends AbstractController {
         }
         header("Location:/?controller=Article&action=All");
     }
+
+
+   
+
 
 }
