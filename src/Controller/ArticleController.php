@@ -23,13 +23,15 @@ class ArticleController extends AbstractController {
             // Redirection
             //header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
+
             $allCategories = new Categorie(); 
             $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
-
+    
             $categories = [];
             foreach ($queryCategories as $categorie){
                 $categories[$categorie->getId()] = $categorie->getLibelle();
             }
+           
             return $this->twig->render("Article/add.html.twig", [
                 'categories' => $categories
             ]);
@@ -80,12 +82,28 @@ class ArticleController extends AbstractController {
         $articles = new Article();
         $datas = $articles->SqlGetById(BDD::getInstance(),$id);
 
+        // Get the category 
+
+        $allCategories = new Categorie(); 
+        $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
+
+        $categories = [];
+        foreach ($queryCategories as $categorie){
+            $categories[$categorie->getId()] = $categorie->getLibelle();
+        }
+
+        var_dump($datas);
+        var_dump($categories);
+
+        //
+
         if($_POST){
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
             $objArticle->setDescription($_POST["Description"]);
             $objArticle->setDateAjout($_POST["DateAjout"]);
             $objArticle->setAuteur($_POST["Auteur"]);
+            $objArticle->setCategorieId($_POST["CategorieID"]);
             $objArticle->setId($id);
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
@@ -93,7 +111,8 @@ class ArticleController extends AbstractController {
             header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
             return $this->twig->render("Article/update.html.twig", [
-                "article"=>$datas
+                "article"=>$datas,
+                'categories' => $categories
             ]);
         }
 

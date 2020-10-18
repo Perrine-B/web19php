@@ -40,6 +40,17 @@
             {% endif %}
 
         </select>
+
+        <select>
+            {% for key, categorie in categories %}
+            
+            {% if article.CategorieId == key %}
+                <option value= {{key}} selected> {{ categorie }}</option>
+            {% else %}
+                <option value={{key}} > {{categorie}}</option>
+            {% endif %}
+               {% endfor %}
+        </select>
         <input type="submit" value="Enregistrer les modifications">
     </form>
 
