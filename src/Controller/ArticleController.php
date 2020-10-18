@@ -7,9 +7,6 @@ use src\Model\Categorie;
 
 class ArticleController extends AbstractController {
 
-
-
-
     public function Add(){
         if($_POST){
             $objArticle = new Article();

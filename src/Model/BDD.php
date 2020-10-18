@@ -11,9 +11,9 @@ class BDD {
     public static function initInstance()
     {
         try{
-            $hostname="localhost";
-            $username="cesi";
-            $password="cesi";
+            $hostname="127.0.0.1";
+            $username="root";
+            $password="";
             $dbname="cesiblog";
 
             SELF::$_instance = new PDO('mysql:host='.$hostname.';dbname='.$dbname.';charset=utf8', $username, $password);
