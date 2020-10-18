@@ -45,17 +45,18 @@ class ArticleController extends AbstractController {
         $articles = new Article();
         $datas = $articles->SqlGetAll(BDD::getInstance());
 
-/********************** Partie 4 non terminée
-        // Replace numbers by name -- 4 inachevé
+        // get categories 
+        $allCategories = new Categorie(); 
+        $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
 
-        // Charger les données venant de catégorie
-        $categories = new Categorie();
-        $categoriesList = $categories->SqlGetAll(BDD::getInstance());
-
-*******/
+        $categories = [];
+        foreach ($queryCategories as $categorie){
+            $categories[$categorie->getId()] = $categorie->getLibelle();
+        }
 
         return $this->twig->render("Article/all.html.twig", [
-            "articleList"=>$datas
+            "articleList"=>$datas,
+            'categories' => $categories
         ]);
     }
 
@@ -92,23 +93,25 @@ class ArticleController extends AbstractController {
             $categories[$categorie->getId()] = $categorie->getLibelle();
         }
 
-        var_dump($datas);
-        var_dump($categories);
+      
 
         //
 
         if($_POST){
+
+            // TO DO, l'update ne fonctionne pas sur la catégorie. Vérifiez ça
+      
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
             $objArticle->setDescription($_POST["Description"]);
             $objArticle->setDateAjout($_POST["DateAjout"]);
             $objArticle->setAuteur($_POST["Auteur"]);
-            $objArticle->setCategorieId($_POST["CategorieID"]);
+            $objArticle->setCategorieId(intval($_POST["CategorieId"]));
             $objArticle->setId($id);
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
             // Redirection
-            header("Location:/cesiblog/web19php/public/article/show/$id");
+            //header("Location:/cesiblog/web19php/public/article/show/$id");
         }else{
             return $this->twig->render("Article/update.html.twig", [
                 "article"=>$datas,

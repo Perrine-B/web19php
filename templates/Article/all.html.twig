@@ -11,8 +11,13 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ article.Titre }}</h5>
-                    <p>{{ article.CategoryId }}</p>
-                    {# Ceci est un commentaire qui ne sera pas visible sur le code HTML #}
+                       {# Importation des catégories #}
+                    {% for key, categorie in categories %}
+                        {% if article.CategorieId == key %}
+                            <h5><span class="badge badge-secondary">{{ categorie }}</span></h5>
+                        {% endif %}
+                    {% endfor %}
+                    {# Fin importation des catégories #}
                     <p class="card-text">
                         {{ article.getShortDesc(3) }}
                         <br/>

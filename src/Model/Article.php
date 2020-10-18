@@ -56,7 +56,7 @@ class Article {
                     DateAjout = :DateAjout, 
                     ImageRepository= :ImageRepository, 
                     ImageFilename= :ImageFilename,
-                    CategorieId = CategorieId,
+                    CategorieId = :CategorieId,
                 WHERE Id = :Id");
 
             $requete->execute([

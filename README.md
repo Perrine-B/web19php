@@ -16,3 +16,7 @@ Dans la page qui affiche le détail d'un article, il faut :
 - Afficher les commentaires de cet article
 
 - Pensez à associer commentaires et articles. 
+
+
+//// Notes : IL reste à trouver la méthode pour l'update de la catégorie sur Article. 
+La variable est transformée en int pour être intégrée dans la BDD mais l'id n'est pas pris en compte. Il faut trouver pourquoi. 

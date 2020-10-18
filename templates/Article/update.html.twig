@@ -41,9 +41,8 @@
 
         </select>
 
-        <select>
+        <select name = 'CategorieId'>
             {% for key, categorie in categories %}
-            
             {% if article.CategorieId == key %}
                 <option value= {{key}} selected> {{ categorie }}</option>
             {% else %}
