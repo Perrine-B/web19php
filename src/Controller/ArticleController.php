@@ -4,13 +4,15 @@ namespace src\Controller;
 use src\Model\Article;
 use src\Model\BDD;
 use src\Model\Categorie;
+use src\Model\Comment;
 
-class ArticleController extends AbstractController {
+class ArticleController extends AbstractController
+{
 
-
-    // CRUD 
-    public function Add(){
-        if($_POST){
+    // CRUD
+    public function Add()
+    {
+        if ($_POST) {
             var_dump($_POST);
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
@@ -20,15 +22,14 @@ class ArticleController extends AbstractController {
             $objArticle->setCategorieId($_POST["CategorieId"]);
             //Exécuter l'insertion
             $id = $objArticle->SqlAdd(BDD::getInstance());
-            // Redirection
+        // Redirection
             //header("Location:/cesiblog/web19php/public/article/show/$id");
-        }else{
-
-            $allCategories = new Categorie(); 
+        } else {
+            $allCategories = new Categorie();
             $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
     
             $categories = [];
-            foreach ($queryCategories as $categorie){
+            foreach ($queryCategories as $categorie) {
                 $categories[$categorie->getId()] = $categorie->getLibelle();
             }
            
@@ -36,21 +37,20 @@ class ArticleController extends AbstractController {
                 'categories' => $categories
             ]);
         }
-
-
     }
 
     // READ
-    public function All(){
+    public function All()
+    {
         $articles = new Article();
         $datas = $articles->SqlGetAll(BDD::getInstance());
 
-        // get categories 
-        $allCategories = new Categorie(); 
+        // get categories
+        $allCategories = new Categorie();
         $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
 
         $categories = [];
-        foreach ($queryCategories as $categorie){
+        foreach ($queryCategories as $categorie) {
             $categories[$categorie->getId()] = $categorie->getLibelle();
         }
 
@@ -60,44 +60,49 @@ class ArticleController extends AbstractController {
         ]);
     }
 
-    // UPDATE
+ 
 
-    public function Show($id){
+    public function Show($id)
+    {
         $articles = new Article();
-        $datas = $articles->SqlGetById(BDD::getInstance(),$id);
+        $datas = $articles->SqlGetById(BDD::getInstance(), $id);
+
+        // Get all comments
+        $comments = new Comment();
+        $allComments = $comments->SqlCommentbyArticle(BDD::getInstance(), $id);
 
         return $this->twig->render("Article/show.html.twig", [
-            "article"=>$datas
+            "article"=>$datas,
+            "comments" => $allComments
         ]);
     }
 
     // DELETE
-    public function Delete($id){
+    public function Delete($id)
+    {
         $articles = new Article();
-        $datas = $articles->SqlDeleteById(BDD::getInstance(),$id);
+        $datas = $articles->SqlDeleteById(BDD::getInstance(), $id);
 
         header("Location:/cesiblog/web19php/public/Article/All");
     }
 
-    public function Update($id){
+    // UPDATE
+    public function Update($id)
+    {
         $articles = new Article();
-        $datas = $articles->SqlGetById(BDD::getInstance(),$id);
+        $datas = $articles->SqlGetById(BDD::getInstance(), $id);
 
-        // Get the category 
+        // Get the category
 
-        $allCategories = new Categorie(); 
+        $allCategories = new Categorie();
         $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
 
         $categories = [];
-        foreach ($queryCategories as $categorie){
+        foreach ($queryCategories as $categorie) {
             $categories[$categorie->getId()] = $categorie->getLibelle();
         }
 
-      
-
-        //
-
-        if($_POST){
+        if ($_POST) {
 
             // TO DO, l'update ne fonctionne pas sur la catégorie. Vérifiez ça
       
@@ -110,27 +115,27 @@ class ArticleController extends AbstractController {
             $objArticle->setId($id);
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
-            // Redirection
-            //header("Location:/cesiblog/web19php/public/article/show/$id");
-        }else{
+        // Redirection
+            header("Location:/cesiblog/web19php/public/article/show/$id");
+        } else {
             return $this->twig->render("Article/update.html.twig", [
                 "article"=>$datas,
                 'categories' => $categories
             ]);
         }
-
     }
 
-    public function Fixtures(){
+    public function Fixtures()
+    {
         //Vider la table
         $article = new Article();
         $article->SqlTruncate(BDD::getInstance());
 
-//Tableau "Jeu de donnée"
+        //Tableau "Jeu de donnée"
         $Titres = ["PHP en force", "Java en baisse", "JS un jour ça marchera", "Flutter valeur montante", "GO le futur"];
         $Prenoms = ["Rebecca", "Alexandre", "Emilie", "Léo", "Aegir"];
         $datedujour = new \DateTime();
-        for($i = 0;$i < 200;$i++){
+        for ($i = 0;$i < 200;$i++) {
             $datedujour->modify("+1 day");
             shuffle($Titres);
             shuffle($Prenoms);
@@ -147,9 +152,4 @@ class ArticleController extends AbstractController {
         }
         header("Location:/?controller=Article&action=All");
     }
-
-
-   
-
-
 }

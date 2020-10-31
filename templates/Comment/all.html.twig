@@ -1,0 +1,30 @@
+ {% if comments|length == 0 %}
+  <div class="alert alert-secondary" role="alert">
+  Cet article ne comporte pas encore de commentaires
+</div>
+{% else %}
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Commentaires ({{comments|length}})
+  </a>
+</p>
+{% for key, comment in comments %}
+<div class="collapse mt-4" id="collapse">
+  <div class="card">
+    <div class="card-header">
+  <h6 class="card-subtitle mb-2 text-muted">par {{comment.Auteur}} ({{comment.EmailAuteur}}) le {{comment.DateAjout|date("d/m/Y", "Europe/Paris")}}</h6>
+  </div>
+   <div class="card-body">
+    <p class="card-text">{{comment.Texte}}</p>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+Modifier
+</button>
+{% include "./Comment/update.html.twig" with {"text" : comment.Texte, "id" : comment.id}%}
+
+    <a href="/cesiblog/web19php/public/comment/delete/{{comment.id}}" role="button" class="btn btn-success">Supprimer</a>
+  </div>
+  </div>
+</div>
+  {% endfor %}
+{% endif %}

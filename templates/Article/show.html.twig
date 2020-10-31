@@ -1,10 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Détail de l'article</h1>
-    <p>{{ article.Titre }}</p>
+    <h1>Détail de l'article "{{article.Titre}}" </h1>
+    <p>par {{ article.Auteur }}</p>
     <p>{{ article.Description }}</p>
-    <p>{{ article.Auteur }}</p>
+
+{% include "./Comment/all.html.twig" %}
+
+{% include "./Comment/add.html.twig" %}
+
+    <div class='mt-4'>
     <p><a href="/cesiblog/web19php/public/article/update/{{ article.Id }}"> Modifier ce super Article </a></p>
     <p><a href="/cesiblog/web19php/public/article/delete/{{ article.Id }}"> Supprimer ce super Article </a></p>
+    </div>
 {% endblock %}

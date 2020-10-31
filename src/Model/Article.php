@@ -1,7 +1,8 @@
 <?php
 namespace src\Model;
 
-class Article {
+class Article
+{
     private $Id;
     private $Titre;
     private $Description;
@@ -16,19 +17,22 @@ class Article {
      * @param $limitWord = LA limite en question
      * @return string
      */
-    public function getShortDesc($limitWord){
-        $arr = explode(' ',trim($this->Description));
+    public function getShortDesc($limitWord)
+    {
+        $arr = explode(' ', trim($this->Description));
         $arrayFirst = array_slice($arr, 0, $limitWord);
         return implode(" ", $arrayFirst);
     }
 
-    public function SqlAdd(\PDO $bdd){
+    public function SqlAdd(\PDO $bdd)
+    {
         try {
             $requete = $bdd->prepare(
                 "INSERT INTO articles (
                     Titre, Description, DateAjout, Auteur, ImageRepository, ImageFilename, CategorieId) 
                 VALUES(
-                    :Titre, :Description, :DateAjout, :Auteur, :ImageRepository, :ImageFilename, :CategorieId)");
+                    :Titre, :Description, :DateAjout, :Auteur, :ImageRepository, :ImageFilename, :CategorieId)"
+            );
 
             $requete->execute([
                 "Titre" => $this->getTitre(),
@@ -40,24 +44,25 @@ class Article {
                 "CategorieId" => $this->getCategorieId()
             ]);
             return $bdd->lastInsertId();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
-
     }
 
-    public function SqlUpdate(\PDO $bdd){
+    public function SqlUpdate(\PDO $bdd)
+    {
         try {
             $requete = $bdd->prepare(
                 "UPDATE articles set 
-                    Titre= :Titre, 
-                    Description = :Description, 
-                    Auteur = :Auteur, 
-                    DateAjout = :DateAjout, 
-                    ImageRepository= :ImageRepository, 
-                    ImageFilename= :ImageFilename,
-                    CategorieId = :CategorieId,
-                WHERE Id = :Id");
+                Titre= :Titre, 
+                Description= :Description, 
+                DateAjout = :DateAjout, 
+                Auteur = :Auteur,
+                ImageRepository= :ImageRepository, 
+                ImageFilename= :ImageFilename,
+                CategorieId = :CategorieId
+                WHERE Id = :Id"
+            );
 
             $requete->execute([
                 "Titre" => $this->getTitre(),
@@ -70,44 +75,47 @@ class Article {
                 "Id" => $this->getId()
             ]);
             return "OK";
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
+            var_dump($e);
             return $e->getMessage();
         }
-
     }
     /**
      * Récupère tous les articles
      * @param \PDO $bdd
      * @return array
      */
-    public function SqlGetAll(\PDO $bdd){
+    public function SqlGetAll(\PDO $bdd)
+    {
         $requete = $bdd->prepare("SELECT * FROM articles");
         $requete->execute();
         //$datas =  $requete->fetchAll(\PDO::FETCH_ASSOC);
-        $datas =  $requete->fetchAll(\PDO::FETCH_CLASS,'src\Model\Article');
+        $datas =  $requete->fetchAll(\PDO::FETCH_CLASS, 'src\Model\Article');
         return $datas;
-
     }
 
-    public function SqlGetById(\PDO $bdd, $Id){
+    public function SqlGetById(\PDO $bdd, $Id)
+    {
         $requete = $bdd->prepare("SELECT * FROM articles WHERE Id=:Id");
         $requete->execute([
             "Id" => $Id
         ]);
-        $requete->setFetchMode(\PDO::FETCH_CLASS,'src\Model\Article');
+        $requete->setFetchMode(\PDO::FETCH_CLASS, 'src\Model\Article');
         $article = $requete->fetch();
 
         return $article;
     }
 
-    public function SqlDeleteById(\PDO $bdd, $Id){
+    public function SqlDeleteById(\PDO $bdd, $Id)
+    {
         $requete = $bdd->prepare("DELETE FROM articles WHERE Id=:Id");
         $requete->execute([
             "Id" => $Id
         ]);
         return true;
     }
-    public function SqlTruncate(\PDO $bdd){
+    public function SqlTruncate(\PDO $bdd)
+    {
         $requete = $bdd->prepare("TRUNCATE TABLE articles");
         $requete->execute();
     }
@@ -239,7 +247,7 @@ class Article {
 
     /**
      * Get the value of CategorieId
-     */ 
+     */
     public function getCategorieId()
     {
         return $this->CategorieId;
@@ -249,7 +257,7 @@ class Article {
      * Set the value of CategorieId
      *
      * @return  self
-     */ 
+     */
     public function setCategorieId($CategorieId)
     {
         $this->CategorieId = $CategorieId;
