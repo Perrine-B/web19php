@@ -22,8 +22,8 @@ class ArticleController extends AbstractController
             $objArticle->setCategorieId($_POST["CategorieId"]);
             //Exécuter l'insertion
             $id = $objArticle->SqlAdd(BDD::getInstance());
-        // Redirection
-            //header("Location:/cesiblog/web19php/public/article/show/$id");
+            // Redirection
+            header("Location:/cesiblog/web19php/public/article/show/$id");
         } else {
             $allCategories = new Categorie();
             $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
@@ -115,7 +115,7 @@ class ArticleController extends AbstractController
             $objArticle->setId($id);
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
-        // Redirection
+            // Redirection
             header("Location:/cesiblog/web19php/public/article/show/$id");
         } else {
             return $this->twig->render("Article/update.html.twig", [

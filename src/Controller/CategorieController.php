@@ -53,16 +53,19 @@ class CategorieController extends AbstractController
         $categories = new Categorie();
         $datas = $categories->SqlGetById(BDD::getInstance(), $id);
 
+        var_dump($_POST);
+        var_dump($id);
+
         if ($_POST) {
             $objCategorie = new Categorie();
-            $objCategorie->getId();
+            $objCategorie->setId($id);
             $objCategorie->setLibelle($_POST["Libelle"]);
             $objCategorie->setIcone($_POST["Icone"]);
 
             //Exécuter la mise à jour
             $objCategorie->SqlUpdate(BDD::getInstance());
             // Redirection -- a refaire
-            header("Location:/cesiblog/web19php/public/Categorie/show/$id");
+           header("Location:/cesiblog/web19php/public/Categorie/show/$id");
         } else {
             return $this->twig->render("Categorie/update.html.twig", [
             "categorie"=>$datas

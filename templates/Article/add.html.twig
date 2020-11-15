@@ -1,25 +1,52 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Ajout de l'article :</h1>
-    <form method="post">
-        <input type="text" name="Titre">
-        <textarea name="Description">
-        </textarea>
-        <input type="date" name="DateAjout" >
-        <select name="Auteur">
-            <option >Rebecca</option>
-            <option >Alexandre</option>
-            <option >Emilie</option>
-            <option>Léo</option>
-            <option >Aegir</option>
-        </select>
-        <select name="CategorieId">
-            {% for key, categorie in categories %}
-            <option value={{key}} > {{categorie}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Enregistrer les modifications">
-    </form>
-
+	<div class='container border border-muted rounded m-4'>
+		<h1 class='p-2'>Ajout de l'article</h1>
+		<form class='p-2' method='post'>
+			<div class="form-group">
+				<label for="Titre">Titre</label>
+				<input type="text" name='Titre' class="form-control" id="Titre" aria-describedby="titleHelp">
+				<small id="titleHelp" class="form-text text-muted">Saisissez le titre de votre article</small>
+			</div>
+			<div class="form-group">
+				<label for="Description">Description</label>
+				<textarea type="textarea" name='Description' class="form-control" id="Description" aria-describedby="descriptionHelp"></textarea>
+				<small id="descriptionHelp" class="form-text text-muted">Saisissez le texte de votre article</small>
+			</div>
+			<div class="form-group">
+				<label for="DateAjout">Date de l'ajout</label>
+				<input type="date" name='DateAjout' class="form-control" id="DateAjout" aria-describedby="dateHelp">
+				<small id="dateHelp" class="form-text text-muted">Saisissez la date de publication de votre article</small>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="Auteurs">Auteur</label>
+				</div>
+				<select name='Auteur' class="custom-select" id="Auteurs">
+					<option selected>Choississez un auteur</option>
+					<option>Rebecca</option>
+					<option>Alexandre</option>
+					<option>Emilie</option>
+					<option>Léo</option>
+					<option>Aegir</option>
+				</select>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="CategorieId">Catégorie</label>
+				</div>
+				<select name="CategorieId" class="custom-select" id='CategorieId'>
+					<option selected>Choississez une catégorie</option>
+					{% for key, categorie in categories %}
+						<option value={{key}}>
+							{{categorie}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="d-flex flex-row-reverse">
+				<button type="submit" align='right' class="btn btn-success">Enregistrer les modifications</button>
+			</div>
+		</form>
+	</div>
 {% endblock %}

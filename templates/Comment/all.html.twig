@@ -1,30 +1,33 @@
- {% if comments|length == 0 %}
-  <div class="alert alert-secondary" role="alert">
-  Cet article ne comporte pas encore de commentaires
+<div class="container p-5 m-6">
+	<h3 class='mb-2'>{{ comments|length == 0 ? '' : 'Commentaires'}}</h3>
+	{% if comments|length == 0 %}
+		<div class="alert alert-secondary" role="alert">
+			Cet article ne comporte pas encore de commentaires
+		</div>
+	{% else %}
+		{% for key, comment in comments %}
+			<div class="card m-4">
+				<div class='card-header bg-dark text-white'>
+					{{comment.Auteur}}
+					({{comment.EmailAuteur}})	dit :
+					<h6 class="card-subtitle mb-2 mt-1 text-muted">
+						le
+						{{comment.DateAjout|date("d/m/Y", "Europe/Paris")}}</h6>
+				</div>
+				<div class="card-body">
+					<p class='card-text'>{{comment.Texte}}
+					</p>
+				</div>
+				<div class='d-flex justify-content-end'>
+					<button type="button" class="m-2 btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
+						Modifier
+					</button>
+					{% include "./Comment/update.html.twig" with {"text" : comment.Texte, "id" : comment.id}%}
+					<a href="/cesiblog/web19php/public/comment/delete/{{comment.id}}" role="button" class="m-2 btn btn-danger">
+						<i class="far fa-trash-alt"></i>
+					</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
 </div>
-{% else %}
-<p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Commentaires ({{comments|length}})
-  </a>
-</p>
-{% for key, comment in comments %}
-<div class="collapse mt-4" id="collapse">
-  <div class="card">
-    <div class="card-header">
-  <h6 class="card-subtitle mb-2 text-muted">par {{comment.Auteur}} ({{comment.EmailAuteur}}) le {{comment.DateAjout|date("d/m/Y", "Europe/Paris")}}</h6>
-  </div>
-   <div class="card-body">
-    <p class="card-text">{{comment.Texte}}</p>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-Modifier
-</button>
-{% include "./Comment/update.html.twig" with {"text" : comment.Texte, "id" : comment.id}%}
-
-    <a href="/cesiblog/web19php/public/comment/delete/{{comment.id}}" role="button" class="btn btn-success">Supprimer</a>
-  </div>
-  </div>
-</div>
-  {% endfor %}
-{% endif %}

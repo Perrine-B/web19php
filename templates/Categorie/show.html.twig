@@ -1,9 +1,27 @@
 {% extends "base.html.twig" %}
-
-{% block body %}
-    <h1>Détail de la catégorie</h1>
-    <i class="{{ categorie.Icone }}"></i>
-    <p>{{ categorie.Libelle }}</p>
-    <p><a href="/cesiblog/web19php/public/Categorie/update/{{ categorie.Id }}"> Modifier cette catégorie </a></p>
-    <p><a href="/cesiblog/web19php/public/Categorie/delete/{{ categorie.Id }}"> Supprimer cette catégorie </a></p>
+{% block title %}
+	{{categorie.Libelle}}
+	-
+	{{ parent() }}
 {% endblock %}
+{% block body %}
+
+	<div class="jumbotron">
+		<h1 class="display-5">{{categorie.Libelle}}
+			<i class="{{ categorie.Icone }}"></i>
+		</h1>
+		<hr class="my-3">
+		<div class="d-flex flex-column align-items-end">
+			<p class="m-1">
+				<a type='button' class='btn btn-info' href="/cesiblog/web19php/public/Categorie/update/{{ categorie.Id }}">
+					Modifier cette catégorie
+				</a>
+			</p>
+			<p class="m-1">
+				<a type='button' class='btn btn-danger' href="/cesiblog/web19php/public/Categorie/delete/{{ categorie.Id }}">
+					Supprimer cette catégorie
+				</a>
+			</p>
+		</div>
+	</div>
+</div>{% endblock %}

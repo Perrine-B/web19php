@@ -1,16 +1,36 @@
 {% extends "base.html.twig" %}
-
+{% block title %}
+	{{article.Titre}} - 
+	{{ parent() }}
+{% endblock %}
 {% block body %}
-    <h1>Détail de l'article "{{article.Titre}}" </h1>
-    <p>par {{ article.Auteur }}</p>
-    <p>{{ article.Description }}</p>
 
-{% include "./Comment/all.html.twig" %}
+	<div class="jumbotron">
+		<h1 class="display-4">{{article.Titre}}
+		</h1>
+		<p>par
+			{{ article.Auteur }}</p>
+		<hr>
+    	<div class="d-flex flex-column justify-content-end">
+			<p class="ml-auto">
+				<a type='button' class='btn btn-info' href="/cesiblog/web19php/public/article/update/{{ article.Id }}">
+					Modifier ce super Article
+				</a>
+			</p>
+			<p class="ml-auto">
+				<a type='button' class='btn btn-danger' href="/cesiblog/web19php/public/article/delete/{{ article.Id }}">
+					Supprimer ce super Article
+				</a>
+			</p>
+		</div>
+	</div>
+	<div class="card m-4">
+		<div class="card-body">
+			<p>{{ article.Description }}</p>
+		</div>
+	</div>
 
-{% include "./Comment/add.html.twig" %}
+	{% include "./Comment/add.html.twig" %}
+	{% include "./Comment/all.html.twig" %}
 
-    <div class='mt-4'>
-    <p><a href="/cesiblog/web19php/public/article/update/{{ article.Id }}"> Modifier ce super Article </a></p>
-    <p><a href="/cesiblog/web19php/public/article/delete/{{ article.Id }}"> Supprimer ce super Article </a></p>
-    </div>
 {% endblock %}

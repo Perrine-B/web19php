@@ -1,35 +1,35 @@
-    <div class='mt-4'>
-    <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#addComment" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Ajouter un commentaire
-  </a>
-</p>
-<div class="collapse" id="addComment">
-  <div class="card card-body">
-   <form method='post' action='/cesiblog/web19php/public/comment/add/'>
-   <div class="form-group">
-    <label for="auteur">Nom</label>
-    <input type="text" name='Auteur' class="form-control" id="auteur" aria-describedby="auteurHelp">
-    <small id="auteurHelp" class="form-text text-muted">Votre nom doit comporter au moins trois caractères</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" name='Email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Saisissez un email valide</small>
-  </div>
-  <div class="form-group">
-    <label for="date">Date</label>
-    <input type="text" name='Date' readonly class="form-control" id="staticEmail2" value={{ "now"|date("d/m/Y", "Europe/Paris") }}>
-    <small id="emailHelp" class="form-text text-muted">La date du jour ne peut être modifiée</small>
-    </div>
- <div class="form-group">
-    <label for="comment">Votre commentaire</label>
-    <input type="textarea" name='Comment' class="form-control" id="comment">
-  </div>
-   <div class="form-group">
-    <input type="hidden" name='Article' class="form-control" id="articleId" value={{article.id}}>
-  </div>
-  <button type="submit" class="btn btn-primary">Envoyer</button>
-</form>
-</div>
-</div>
+<div class="container p-4">
+	<div class='mb-4 d-flex flex-row-reverse'>
+		<a class="btn btn-success" data-toggle="collapse" href="#addComment" role="button" aria-expanded="false" aria-controls="collapseExample">
+			Ajouter un commentaire
+		</a>
+	</div>
+	<div class="collapse" id="addComment">
+		<div class="card card-body">
+			<form method='post' action='/cesiblog/web19php/public/comment/add/' class='d-flex flex-column'>
+				<div class="form-group">
+					<label for="auteur">Nom</label>
+					<input type="text" name='Auteur' class="form-control" id="auteur" aria-describedby="auteurHelp">
+					<small id="auteurHelp" class="form-text text-muted">Votre nom doit comporter au moins trois caractères</small>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email</label>
+					<input type="email" name='Email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					<small id="emailHelp" class="form-text text-muted">Saisissez un email valide</small>
+				</div>
+				<div class="form-group">
+					<label for="date">Date</label>
+					<input type="text" name='Date' readonly class="form-control" id="staticEmail2" value={{ "now"|date("d/m/Y", "Europe/Paris") }}>
+					<small id="emailHelp" class="form-text text-muted">La date du jour ne peut être modifiée</small>
+				</div>
+				<div class="form-group">
+					<label for="comment">Votre commentaire</label>
+					<input type="textarea" name='Comment' class="form-control" id="comment">
+				</div>
+				<div class="form-group">
+					<input type="hidden" name='Article' class="form-control" id="articleId" value={{article.id}}>
+				</div>
+				<button type="submit" class="btn btn-success justify-content-end">Publier</button>
+			</form>
+		</div>
+	</div>
