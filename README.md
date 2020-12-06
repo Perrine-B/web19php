@@ -1,9 +1,15 @@
-Modifications pour fonctionner sous l'environnement: 
-- les mots de passe de la BDD
-- les hrefs dans les templates
-- la config du loader TWIG dans l'abstractController
+### Rattrapage PHP 
+#### Modifications pour fonctionner sous l'environnement: 
+- pour éviter les problèmes de compatibilité, un dump complet de la base de données utilisée est disponible dans le dossier Base SQL. 
+Les identifiants par défaut recommandés sont  :
 
-Sujet 
+``` php     
+$hostname = "localhost";
+$username = "cesi";
+$password = "cesi";
+$dbname = "cesiblog";
+```
+#### Sujet 
 
 Intégrer un système de commentaire dans le site
 
