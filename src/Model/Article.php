@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Model;
 
 class Article
@@ -76,7 +77,6 @@ class Article
             ]);
             return "OK";
         } catch (\Exception $e) {
-            var_dump($e);
             return $e->getMessage();
         }
     }

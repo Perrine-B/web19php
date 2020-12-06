@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Controller;
 
 use src\Model\Article;
@@ -13,7 +14,6 @@ class ArticleController extends AbstractController
     public function Add()
     {
         if ($_POST) {
-            var_dump($_POST);
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
             $objArticle->setDescription($_POST["Description"]);
@@ -27,12 +27,12 @@ class ArticleController extends AbstractController
         } else {
             $allCategories = new Categorie();
             $queryCategories = $allCategories->SqlGetAll(BDD::getInstance());
-    
+
             $categories = [];
             foreach ($queryCategories as $categorie) {
                 $categories[$categorie->getId()] = $categorie->getLibelle();
             }
-           
+
             return $this->twig->render("Article/add.html.twig", [
                 'categories' => $categories
             ]);
@@ -55,12 +55,12 @@ class ArticleController extends AbstractController
         }
 
         return $this->twig->render("Article/all.html.twig", [
-            "articleList"=>$datas,
+            "articleList" => $datas,
             'categories' => $categories
         ]);
     }
 
- 
+
 
     public function Show($id)
     {
@@ -72,7 +72,7 @@ class ArticleController extends AbstractController
         $allComments = $comments->SqlCommentbyArticle(BDD::getInstance(), $id);
 
         return $this->twig->render("Article/show.html.twig", [
-            "article"=>$datas,
+            "article" => $datas,
             "comments" => $allComments
         ]);
     }
@@ -105,7 +105,7 @@ class ArticleController extends AbstractController
         if ($_POST) {
 
             // TO DO, l'update ne fonctionne pas sur la catégorie. Vérifiez ça
-      
+
             $objArticle = new Article();
             $objArticle->setTitre($_POST["Titre"]);
             $objArticle->setDescription($_POST["Description"]);
@@ -119,7 +119,7 @@ class ArticleController extends AbstractController
             header("Location:/cesiblog/web19php/public/article/show/$id");
         } else {
             return $this->twig->render("Article/update.html.twig", [
-                "article"=>$datas,
+                "article" => $datas,
                 'categories' => $categories
             ]);
         }
@@ -135,7 +135,7 @@ class ArticleController extends AbstractController
         $Titres = ["PHP en force", "Java en baisse", "JS un jour ça marchera", "Flutter valeur montante", "GO le futur"];
         $Prenoms = ["Rebecca", "Alexandre", "Emilie", "Léo", "Aegir"];
         $datedujour = new \DateTime();
-        for ($i = 0;$i < 200;$i++) {
+        for ($i = 0; $i < 200; $i++) {
             $datedujour->modify("+1 day");
             shuffle($Titres);
             shuffle($Prenoms);

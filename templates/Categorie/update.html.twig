@@ -1,8 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Modifier {{ categorie.Libelle }} <i class="{{ categorie.Icone }}"></i></h1>
-        <form method='post'>
+	<h1>Modifier
+		{{ categorie.Libelle }}
+		<i class="{{ categorie.Icone }}"></i>
+	</h1>
+	<form method='post'>
 		<div class="form-group">
 			<label for="Libelle">Titre</label>
 			<input type="text" name='Libelle' class="form-control" value="{{ categorie.Libelle }}" id="Libelle" aria-describedby="LibelleHelp">
@@ -10,12 +13,15 @@
 		</div>
 		<div class="form-group">
 			<label for="Icone">Icone</label>
-			<input type="text" name='Icone' value ='{{categorie.Icone|trim}}' class="form-control" id="Icone" aria-describedby="iconeHelp">
-			<small id="descriptionHelp" class="form-text text-muted">Modifiez le code <a href='https://fontawesome.com/icons?d=gallery'>FontAwesome<a/> correspondant à l'icone que vous voulez voir associée à votre catégorie. Exemple: fas fa-sun </small>
-		</div>
-        <div class="d-flex flex-row-reverse">
-			<button type="submit" align='right' class="btn btn-success">Enregistrer les modifications</button>
-		</div>
-	</form>
+			<input type="text" name='Icone' value='{{categorie.Icone|trim}}' class="form-control" id="Icone" aria-describedby="iconeHelp">
+			<small id="descriptionHelp" class="form-text text-muted">Modifiez le code
+				<a href='https://fontawesome.com/icons?d=gallery'>FontAwesome<a/>
+					correspondant à l'icone que vous voulez voir associée à votre catégorie. Exemple: fas fa-sun
+				</small>
+			</div>
+			<div class="d-flex flex-row-reverse">
+				<button type="submit" align='right' class="btn btn-success">Enregistrer les modifications</button>
+			</div>
+		</form>
 
-{% endblock %}
+	{% endblock %}

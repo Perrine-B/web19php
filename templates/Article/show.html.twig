@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block title %}
-	{{article.Titre}} - 
+	{{article.Titre}}
+	-
 	{{ parent() }}
 {% endblock %}
 {% block body %}
@@ -11,7 +12,7 @@
 		<p>par
 			{{ article.Auteur }}</p>
 		<hr>
-    	<div class="d-flex flex-column justify-content-end">
+		<div class="d-flex flex-column justify-content-end">
 			<p class="ml-auto">
 				<a type='button' class='btn btn-info' href="/cesiblog/web19php/public/article/update/{{ article.Id }}">
 					Modifier ce super Article

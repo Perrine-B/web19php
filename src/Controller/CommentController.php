@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Controller;
 
 use src\Model\Article;
@@ -12,9 +13,6 @@ class CommentController extends AbstractController
 
     public function Add($id)
     {
-        var_dump('tartine');
-        var_dump($_POST['Article']);
-
         $objComment = new Comment();
         $objComment->setTexte($_POST["Comment"]);
         $objComment->setAuteur($_POST["Auteur"]);
@@ -56,9 +54,9 @@ class CommentController extends AbstractController
         $targetComment->getEmailAuteur();
         $targetComment->getArticleId();
 
-            //Exécuter la mise à jour
+        //Exécuter la mise à jour
         $targetComment->SqlUpdate(BDD::getInstance(), $targetComment->getId());
-            // Redirection -- a refaire
+        // Redirection -- a refaire
         header("Location:/cesiblog/web19php/public/Article/Show/$correspondingArticle");
     }
 }

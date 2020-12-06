@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Model;
 
 class Categorie
@@ -86,8 +87,8 @@ class Categorie
     {
         $requete = $bdd->prepare("SELECT * FROM categories WHERE Id=:Id");
         $requete->execute([
-                "Id" => $Id
-            ]);
+            "Id" => $Id
+        ]);
         $requete->setFetchMode(\PDO::FETCH_CLASS, 'src\Model\Categorie');
         $categorie = $requete->fetch();
 
@@ -119,13 +120,12 @@ class Categorie
             $requete = $bdd->prepare("UPDATE categories set Libelle= :Libelle, Icone = :Icone WHERE Id = :Id");
 
             $requete->execute([
-                 "Id" => $this->getId(),
-                 "Libelle" => $this->getLibelle(),
-                 "Icone" => $this->getIcone()
+                "Id" => $this->getId(),
+                "Libelle" => $this->getLibelle(),
+                "Icone" => $this->getIcone()
             ]);
             return "OK";
         } catch (\Exception $e) {
-            var_dump($e);
             return $e->getMessage();
         }
     }
@@ -135,8 +135,8 @@ class Categorie
     {
         $requete = $bdd->prepare("DELETE FROM categories WHERE Id=:Id");
         $requete->execute([
-                "Id" => $Id
-            ]);
+            "Id" => $Id
+        ]);
         return true;
     }
 }

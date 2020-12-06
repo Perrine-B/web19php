@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Controller;
 
 class ContactController extends AbstractController

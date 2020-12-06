@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Controller;
 
 use src\Model\Categorie;
@@ -15,7 +16,7 @@ class CategorieController extends AbstractController
         $datas = $categories->SqlGetAll(BDD::getInstance());
         // Modifier le return pour l'affichage des catégories
         return $this->twig->render("Categorie/all.html.twig", [
-           "categories"=>$datas
+            "categories" => $datas
         ]);
     }
 
@@ -25,7 +26,7 @@ class CategorieController extends AbstractController
         $datas = $categories->SqlGetById(BDD::getInstance(), $id);
 
         return $this->twig->render("Categorie/show.html.twig", [
-            "categorie"=>$datas
+            "categorie" => $datas
         ]);
     }
 
@@ -33,7 +34,6 @@ class CategorieController extends AbstractController
     public function Add()
     {
         if ($_POST) {
-            var_dump($_POST["Libelle"]);
             $objCategorie = new Categorie();
             $objCategorie->setLibelle($_POST["Libelle"]);
             $objCategorie->setIcone($_POST["Icone"]);
@@ -52,10 +52,7 @@ class CategorieController extends AbstractController
     {
         $categories = new Categorie();
         $datas = $categories->SqlGetById(BDD::getInstance(), $id);
-
-        var_dump($_POST);
-        var_dump($id);
-
+        
         if ($_POST) {
             $objCategorie = new Categorie();
             $objCategorie->setId($id);
@@ -65,11 +62,11 @@ class CategorieController extends AbstractController
             //Exécuter la mise à jour
             $objCategorie->SqlUpdate(BDD::getInstance());
             // Redirection -- a refaire
-           header("Location:/cesiblog/web19php/public/Categorie/show/$id");
+            header("Location:/cesiblog/web19php/public/Categorie/show/$id");
         } else {
             return $this->twig->render("Categorie/update.html.twig", [
-            "categorie"=>$datas
-        ]);
+                "categorie" => $datas
+            ]);
         }
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Model;
 
 use PDO;
@@ -17,15 +18,15 @@ class BDD
     public static function initInstance()
     {
         try {
-            $hostname="127.0.0.1";
-            $username="root";
-            $password="";
-            $dbname="cesiblog";
+            $hostname = "127.0.0.1";
+            $username = "root";
+            $password = "";
+            $dbname = "cesiblog";
 
-            SELF::$_instance = new PDO('mysql:host='.$hostname.';dbname='.$dbname.';charset=utf8', $username, $password);
+            SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (\Exception $e) {
-            SELF::$_instance = 'Erreur : '.$e->getMessage();
+            SELF::$_instance = 'Erreur : ' . $e->getMessage();
         }
     }
 

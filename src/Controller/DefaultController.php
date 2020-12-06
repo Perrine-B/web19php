@@ -1,11 +1,13 @@
 <?php
+
 namespace src\Controller;
 
-class DefaultController extends AbstractController {
+class DefaultController extends AbstractController
+{
 
-    public function index(){
+    public function index()
+    {
 
         return $this->twig->render("accueil.html.twig");
     }
-
 }

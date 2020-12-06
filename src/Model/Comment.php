@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Model;
 
 class Comment
@@ -164,12 +165,12 @@ class Comment
             $requete = $bdd->prepare("INSERT INTO commentaires (Texte, DateAjout, Auteur, EmailAuteur, ArticleId) VALUES(:Texte, :DateAjout, :Auteur, :EmailAuteur, :ArticleId)");
 
             $requete->execute([
-            'Texte' => $this->getTexte(),
-            'DateAjout' => $this->getDateAjout(),
-            'Auteur' => $this->getAuteur(),
-            'EmailAuteur' => $this->getEmailAuteur(),
-            'ArticleId' => $this->getArticleId()
-        ]);
+                'Texte' => $this->getTexte(),
+                'DateAjout' => $this->getDateAjout(),
+                'Auteur' => $this->getAuteur(),
+                'EmailAuteur' => $this->getEmailAuteur(),
+                'ArticleId' => $this->getArticleId()
+            ]);
             return $bdd->lastInsertId();
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -190,16 +191,15 @@ class Comment
         WHERE Id = :Id");
 
             $requete->execute([
-            'Texte' => $this->getTexte(),
-            'DateAjout' => $this->getDateAjout(),
-            'Auteur' => $this->getAuteur(),
-            'EmailAuteur' => $this->getEmailAuteur(),
-            'ArticleId' => $this->getArticleId(),
-            'Id' => $this->getId()
-        ]);
+                'Texte' => $this->getTexte(),
+                'DateAjout' => $this->getDateAjout(),
+                'Auteur' => $this->getAuteur(),
+                'EmailAuteur' => $this->getEmailAuteur(),
+                'ArticleId' => $this->getArticleId(),
+                'Id' => $this->getId()
+            ]);
             return "OK";
         } catch (\Exception $e) {
-            var_dump($e);
             return $e->getMessage();
         }
     }
