@@ -19,14 +19,11 @@
 								{{ article.getShortDesc(3) }}...
 							</p>
 						</span>
-						<a href="/cesiblog/web19php/public/Article/Show/{{ article.Id }}" class="m-2 btn btn-info">
+						<a href="/Article/Show/{{ article.Id }}" class="m-2 btn btn-info">
 							Lire la suite
 						</a>
 					</div>
 					<div class="card-footer d-flex flex-column align-items-center">
-						<p class=' mt-0 text-muted'>Ecrit le
-							{{ article.DateAjout|date("d/m/Y") }}
-						</p>
 						{# Importation des catégories #}
 						{% for key, categorie in categories %}
 							{% if article.CategorieId == key %}
@@ -37,6 +34,9 @@
 							{% endif %}
 						{% endfor %}
 						{# Fin importation des catégories #}
+						<p class=' mt-0 text-muted'>Ecrit le
+							{{ article.DateAjout|date("d/m/Y") }}
+						</p>
 					</div>
 				</div>
 			{% endfor %}

@@ -23,7 +23,7 @@
 						Modifier
 					</button>
 					{% include "./Comment/update.html.twig" with {"text" : comment.Texte, "id" : comment.id}%}
-					<a href="/cesiblog/web19php/public/comment/delete/{{comment.id}}" role="button" class="m-2 btn btn-danger">
+					<a href="/comment/delete/{{comment.id}}" role="button" class="m-2 btn btn-danger">
 						<i class="far fa-trash-alt"></i>
 					</a>
 				</div>

@@ -2,9 +2,7 @@
 
 namespace src\Controller;
 
-use src\Model\Article;
 use src\Model\BDD;
-use src\Model\Categorie;
 use src\Model\Comment;
 
 class CommentController extends AbstractController
@@ -23,7 +21,7 @@ class CommentController extends AbstractController
         $location = $_POST["Article"];
 
         // Redirection
-        header("Location:/cesiblog/web19php/public/article/show/$location");
+        header("Location:/article/show/$location");
     }
 
     // DELETE
@@ -38,7 +36,7 @@ class CommentController extends AbstractController
         $dComment = new Comment();
         $dComment->SqlDeleteById(BDD::getInstance(), $id);
 
-        header("Location:/cesiblog/web19php/public/Article/Show/$correspondingArticle");
+        header("Location:/Article/Show/$correspondingArticle");
     }
 
     public function Update($id)
@@ -57,6 +55,6 @@ class CommentController extends AbstractController
         //Exécuter la mise à jour
         $targetComment->SqlUpdate(BDD::getInstance(), $targetComment->getId());
         // Redirection -- a refaire
-        header("Location:/cesiblog/web19php/public/Article/Show/$correspondingArticle");
+        header("Location:/Article/Show/$correspondingArticle");
     }
 }
